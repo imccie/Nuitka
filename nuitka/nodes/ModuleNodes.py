@@ -534,7 +534,11 @@ class UncompiledPythonModule(PythonModuleBase):
         self.user_provided = user_provided
         self.technical = technical
 
-        self.used_modules = ()
+        # We obviously always use the package.
+        if self.package_name is not None:
+            self.used_modules = (package_name,)
+        else:
+            self.used_modules = ()
 
     @staticmethod
     def isUncompiledPythonModule():
